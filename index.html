@@ -31,14 +31,14 @@
         <p>Escribe el código de tu partida para continuar.</p>
         <form id="access-form" novalidate>
           <label class="sr-only" for="game-code">Código de partida</label>
-          <input id="game-code" name="code" type="text" maxlength="32" autocomplete="off" spellcheck="false" placeholder="Ej. DIGIMON" required>
+          <input id="game-code" name="code" type="text" maxlength="32" autocomplete="off" spellcheck="false" autocapitalize="characters" placeholder="Código de acceso" required>
           <p class="form-error" id="code-error" role="alert" hidden>Código no válido. Inténtalo de nuevo.</p>
           <button class="button button-primary" type="submit">
             <img src="./assets/chevrons-white.png" alt="">
             ENTRAR
           </button>
         </form>
-        <small class="access-hint">Código de prueba: <code>DIGIMON</code></small>
+        <small class="access-hint">Los códigos de juego se renuevan cada día.</small>
       </div>
     </section>
 
@@ -49,7 +49,7 @@
         <p>Selecciona un nivel para comenzar.</p>
       </div>
       <div class="level-grid" id="level-list" aria-label="Niveles de dificultad"></div>
-      <p class="page-help">Podrás cambiar el nivel en cualquier momento.</p>
+      <p class="page-help" id="levels-help">Podrás cambiar el nivel en cualquier momento.</p>
     </section>
 
     <section class="view view-game" id="game-view" aria-label="Carta de pregunta y respuesta" hidden>
@@ -64,6 +64,17 @@
           <div class="level-menu" id="level-menu" aria-label="Elegir nivel" hidden></div>
         </div>
         <button class="text-button" id="change-level-button" type="button">CAMBIAR NIVEL</button>
+      </div>
+
+      <button class="filter-trigger" id="open-filters" type="button" aria-haspopup="dialog" aria-controls="filter-dialog">
+        <span>FILTRAR PREGUNTAS</span>
+        <span class="filter-count" id="filter-count" aria-live="polite">TODAS</span>
+        <span class="filter-trigger-chevron" aria-hidden="true"></span>
+      </button>
+
+      <div class="filter-empty" id="filter-empty" role="status" hidden>
+        <p>No hay preguntas de este nivel con los filtros elegidos.</p>
+        <button class="text-button" id="clear-empty-filters" type="button">QUITAR FILTROS</button>
       </div>
 
       <div class="flip-stage">
@@ -96,6 +107,10 @@
               </div>
             </div>
           </div>
+          <div class="card-loading" id="card-loading" role="status" aria-live="polite" hidden>
+            <span class="card-loading-spinner" aria-hidden="true"></span>
+            <strong>CARGANDO PREGUNTA</strong>
+          </div>
         </article>
       </div>
 
@@ -112,6 +127,19 @@
       <p class="page-help" id="game-help">La pregunta se elige al azar dentro del nivel seleccionado.</p>
     </section>
   </main>
+
+  <dialog class="filter-dialog" id="filter-dialog" aria-labelledby="filter-dialog-title">
+    <div class="filter-dialog-header">
+      <h2 id="filter-dialog-title">FILTRAR PREGUNTAS</h2>
+      <button class="filter-close" id="close-filters" type="button" aria-label="Cerrar filtros">×</button>
+    </div>
+    <p class="filter-intro">Marca una o varias etiquetas. Se mostrará cualquier pregunta que coincida con al menos una.</p>
+    <div class="filter-groups" id="filter-groups"></div>
+    <div class="filter-dialog-actions">
+      <button class="text-button filter-clear" id="clear-filters" type="button">LIMPIAR FILTROS</button>
+      <button class="button button-primary" id="done-filters" type="button">VER PREGUNTA</button>
+    </div>
+  </dialog>
 
   <noscript>Activa JavaScript para usar el banco de preguntas.</noscript>
 </body>
