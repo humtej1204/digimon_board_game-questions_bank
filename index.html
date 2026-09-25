@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4eb">
+  <meta name="description" content="Banco de preguntas para Digimon Board Game.">
+  <title>Banco de Preguntas | Digimon Board Game</title>
+  <link rel="icon" type="image/png" href="./assets/h-logo.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <button class="brand" id="brand-home" type="button" aria-label="Volver al inicio">
+      <span class="brand-mark"><img src="./assets/h-logo.png" alt=""></span>
+      <span class="brand-copy">
+        <strong>DIGIMON BOARD GAME</strong>
+        <small>BANCO DE PREGUNTAS</small>
+      </span>
+    </button>
+    <span class="mode-tag" id="mode-tag">MODO PREGUNTAS</span>
+    <button class="header-action" id="home-button" type="button" hidden>← INICIO</button>
+  </header>
+
+  <main>
+    <section class="view view-access" id="access-view" aria-labelledby="access-title">
+      <div class="access-panel">
+        <span class="badge">ACCESO DE TAMER</span>
+        <h1 id="access-title">INGRESA TU CÓDIGO</h1>
+        <p>Escribe el código de tu partida para continuar.</p>
+        <form id="access-form" novalidate>
+          <label class="sr-only" for="game-code">Código de partida</label>
+          <input id="game-code" name="code" type="text" maxlength="32" autocomplete="off" spellcheck="false" placeholder="Ej. DIGIMON" required>
+          <p class="form-error" id="code-error" role="alert" hidden>Código no válido. Inténtalo de nuevo.</p>
+          <button class="button button-primary" type="submit">
+            <img src="./assets/chevrons-white.png" alt="">
+            ENTRAR
+          </button>
+        </form>
+        <small class="access-hint">Código de prueba: <code>DIGIMON</code></small>
+      </div>
+    </section>
+
+    <section class="view view-levels" id="levels-view" aria-labelledby="levels-title" hidden>
+      <div class="section-heading">
+        <span class="badge">ELIGE TU RETO</span>
+        <h1 id="levels-title">¿QUÉ TAN DIFÍCIL?</h1>
+        <p>Selecciona un nivel para comenzar.</p>
+      </div>
+      <div class="level-grid" id="level-list" aria-label="Niveles de dificultad"></div>
+      <p class="page-help">Podrás cambiar el nivel en cualquier momento.</p>
+    </section>
+
+    <section class="view view-game" id="game-view" aria-label="Carta de pregunta y respuesta" hidden>
+      <div class="level-control">
+        <small>NIVEL ACTUAL</small>
+        <div class="level-picker">
+          <button class="level-toggle" id="level-toggle" type="button" aria-label="Cambiar nivel de preguntas" aria-expanded="false" aria-controls="level-menu">
+            <span id="current-level">NIVEL 3</span>
+            <span class="inline-stars" id="current-stars" aria-hidden="true">★★★</span>
+            <span class="level-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="level-menu" id="level-menu" aria-label="Elegir nivel" hidden></div>
+        </div>
+        <button class="text-button" id="change-level-button" type="button">CAMBIAR NIVEL</button>
+      </div>
+
+      <div class="flip-stage">
+        <article class="playing-card" id="playing-card" aria-label="Carta de pregunta">
+          <div class="playing-card-inner">
+            <div class="playing-card-face card-front" id="card-front">
+              <div class="card-topline">
+                <span class="card-badge">PREGUNTA</span>
+                <span class="card-level">NIVEL 3</span>
+              </div>
+              <h1 id="question-text">¿Qué objeto permite realizar una evolución Armor?</h1>
+              <div class="card-bottomline">
+                <span>BANCO DE PREGUNTAS</span>
+                <span class="card-stars" aria-hidden="true">★ ★ ★</span>
+              </div>
+            </div>
+            <div class="playing-card-face card-back" id="card-back" aria-hidden="true">
+              <div class="card-topline">
+                <span class="card-badge">RESPUESTA</span>
+                <span class="card-level">NIVEL 3</span>
+              </div>
+              <img class="back-emblem" src="./assets/h-logo.png" alt="">
+              <div class="answer-copy">
+                <h2 id="answer-text">Un Digimental.</h2>
+                <p id="answer-detail">Los Digimentals permiten activar la evolución Armor.</p>
+              </div>
+              <div class="card-bottomline">
+                <span>DIGIMON BOARD GAME</span>
+                <span class="card-stars" aria-hidden="true">★ ★ ★</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="outside-actions">
+        <button class="button button-secondary" id="next-question" type="button">
+          <img src="./assets/reset.png" alt="">
+          OTRA PREGUNTA
+        </button>
+        <button class="button button-primary" id="flip-card" type="button" aria-pressed="false">
+          <img id="flip-icon" src="./assets/chevrons-white.png" alt="">
+          <span id="flip-label">VER RESPUESTA</span>
+        </button>
+      </div>
+      <p class="page-help" id="game-help">La pregunta se elige al azar dentro del nivel seleccionado.</p>
+    </section>
+  </main>
+
+  <noscript>Activa JavaScript para usar el banco de preguntas.</noscript>
+</body>
+</html>
